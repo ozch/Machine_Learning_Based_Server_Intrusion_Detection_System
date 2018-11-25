@@ -17,7 +17,10 @@ columns=["'duration'","'flag'","'service'","'src_bytes'","'dst_bytes'","'urgent'
 df = pd.DataFrame(csv,columns=columns)
 
 #data manipulation, quering required data
-df = df.loc[df["'service'"] == 'http']
+df1 = df.loc[df["'service'"]=='http']
+df2 = df.loc[df["'service'"]=='http_443']
+df = pd.concat([df1,df2])
+
 df["'flag'"].replace(flag_map,inplace=True)
 df["'class'"].replace(class_map,inplace=True)
 print(df)
