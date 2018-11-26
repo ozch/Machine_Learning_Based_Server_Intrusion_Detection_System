@@ -1,0 +1,92 @@
+
+================================= UDP_TCP =================================
+svm.SVC():
+	data_size=[23537 rows x columns.size]
+	columns=["'protocol_type'"=[udp,tcp],"'duration'","'flag'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
+	Train Accuracy =  0.9939383639247678
+	Test Accuracy = 0.9694137638062872
+	confusion_matrix = 
+	[[3245    3]
+ 	[ 177 2460]]
+GaussianNB():
+	data_size=[23537 rows x columns.size]
+	columns=["'protocol_type'"=[udp,tcp],"'duration'","'flag'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
+	Train Accuracy =  0.5718898708361658
+	Test Accuracy =  0.5587085811384876
+	confusion_matrix = 
+	[[3186   62]
+ 	[2535  102]]
+RandomForestRegressor():
+	data_size=[23537 rows x columns.size]
+	columns=["'protocol_type'"=[udp,tcp],"'duration'","'flag'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
+	Train Accuracy :  0.9806014245101217
+	Test Accuracy :  0.9738756784408612
+	confusion_matrix = 
+	[[3240    8]
+ 	[  38 2599]]
+================================= ICMP =================================
+svm.SVC():
+	data_size=[1645 rows x columns.size]
+	columns=["'protocol_type'"=[icmp],"'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
+	Train Accuracy :  0.8726682887266829
+	Test Accuracy :  0.8519417475728155
+	class_map ={'normal':0,'ipsweep':1,'nmap':2,'pod':3,'smurf':4}
+	confusion_matrix = 
+	[[ 68   0   0   0   9]
+ 	 [  0 144   0   0   0]
+ 	 [  0  50   0   0   0]
+ 	 [  0   0   0   7   2]
+ 	 [  0   0   0   0 132]]
+GaussianNB():
+	data_size=[1645 rows x columns.size]
+	columns=["'protocol_type'"=[icmp],"'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
+	Train Accuracy :  0.6820762368207623
+	Test Accuracy :  0.7014563106796117
+	confusion_matrix = 
+	[[ 75   0   0   0   2]
+	 [  1  24 119   0   0]
+	 [  0   0  50   0   0]
+	 [  0   0   0   9   0]
+	 [  0   0   0   1 131]]
+
+RandomForestRegressor():
+	data_size=[1645 rows x columns.size]
+	columns=["'protocol_type'"=[icmp],"'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
+	Train Accuracy :  0.964022473792323
+	Test Accuracy :  0.9614354113699156
+	class_map ={'normal':0,'ipsweep':1,'nmap':2,'pod':3,'smurf':4}
+	confusion_matrix = 
+	[[ 77   0   0   0   0]
+	 [  0 131  13   0   0]
+	 [  0  46   4   0   0]
+	 [  0   0   0   9   0]
+	 [  0   0   0   0 132]]
+================================= HTTP =================================
+svm.SVC():
+	data_size=[8116 rows x columns.size]
+	columns=["'duration'","'flag'","'service'"=[http,http_443],"'src_bytes'","'dst_bytes'","'urgent'","'wrong_fragment'","'class'"]
+	Train Accuracy :  0.9871858058156727
+	Test Accuracy :  0.9807787087235091
+	class_map = {'normal':0,'anomaly':1}
+	confusion_matrix = 
+	[[1870   18]
+ 	 [  21  120]]
+GaussianNB():
+	data_size=[8116 rows x columns.size]
+	columns=["'duration'","'flag'","'service'"=[http,http_443],"'src_bytes'","'dst_bytes'","'urgent'","'wrong_fragment'","'class'"]
+	Train Accuracy :  0.9811072778051585
+	Test Accuracy :  0.9797930014785609
+	class_map = {'normal':0,'anomaly':1}
+	confusion_matrix = 
+	[[1863   25]
+ 	 [  16  125]]
+RandomForestRegressor():
+	data_size=[8116 rows x columns.size]
+	columns=["'duration'","'flag'","'service'"=[http,http_443],"'src_bytes'","'dst_bytes'","'urgent'","'wrong_fragment'","'class'"]
+	Train Accuracy :  0.8236661292131908
+	Test Accuracy :  0.7833707264516174
+	class_map = {'normal':0,'anomaly':1}
+	confusion_matrix = 
+	[[1870   18]
+ 	 [  15  126]]
+
