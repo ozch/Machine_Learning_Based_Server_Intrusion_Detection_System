@@ -4,10 +4,11 @@ from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import *
+from k_fold_validation import *
 import pickle
 import pandas as pd
 import numpy as np
-
+model_cat = "udp_tcp"
 #mapping to mathematical values
 flag_map = {'S0':1,'S1':2,'S2':3,'S3':4,'SH':5,'SF':6,'OTH':7,'REJ':8,'RSTO':9,'RSTR':10,'RSTOS0':11}
 class_map = {'normal':0,'anomaly':1}
@@ -38,7 +39,7 @@ model.fit(X_train,y_train)
 
 #saving model using pickle
 m_name="rf_reg"
-pkl_filename="models\\"+m_name+'.pkl'
+pkl_filename="models\\"+model_cat+"_"+m_name+'.pkl'
 with open(pkl_filename, 'wb') as file:
     pickle.dump(model, file)
 
@@ -55,3 +56,6 @@ print(y_test[200])
 y_pred = model.fit(X_train.round(), y_train.round()).predict(X_test.round())
 cnf_matrix = confusion_matrix(y_test.round(), y_pred.round())
 print(cnf_matrix)
+
+kf = KFoldValidation()
+kf.GetAverageScore(10,features,label,RandomForestRegressor())

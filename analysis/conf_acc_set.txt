@@ -21,6 +21,8 @@ RandomForestRegressor():
 	columns=["'protocol_type'"=[udp,tcp],"'duration'","'flag'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
 	Train Accuracy :  0.9806014245101217
 	Test Accuracy :  0.9738756784408612
+	Average Train Accuracy : 0.9817753479077682
+    Average Test Accuracy : 0.9634464158915608
 	confusion_matrix = 
 	[[3240    8]
  	[  38 2599]]
@@ -85,6 +87,8 @@ RandomForestRegressor():
 	columns=["'duration'","'flag'","'service'"=[http,http_443],"'src_bytes'","'dst_bytes'","'urgent'","'wrong_fragment'","'class'"]
 	Train Accuracy :  0.8236661292131908
 	Test Accuracy :  0.7833707264516174
+	Average Train Accuracy : 0.819915746395227
+    Average Test Accuracy : 0.8129677263087624
 	class_map = {'normal':0,'anomaly':1}
 	confusion_matrix = 
 	[[1870   18]
