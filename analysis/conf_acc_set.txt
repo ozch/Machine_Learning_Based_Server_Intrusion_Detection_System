@@ -1,3 +1,5 @@
+INFO:
+    Average Train/Test Accuracy : 10-K Fold Cross Validation
 
 ================================= UDP_TCP =================================
 svm.SVC():
@@ -5,6 +7,8 @@ svm.SVC():
 	columns=["'protocol_type'"=[udp,tcp],"'duration'","'flag'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
 	Train Accuracy =  0.9939383639247678
 	Test Accuracy = 0.9694137638062872
+	Average Train Accuracy : 0.9943960747334858
+    Average Test Accuracy : 0.9474297273355804
 	confusion_matrix = 
 	[[3245    3]
  	[ 177 2460]]
@@ -13,6 +17,8 @@ GaussianNB():
 	columns=["'protocol_type'"=[udp,tcp],"'duration'","'flag'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
 	Train Accuracy =  0.5718898708361658
 	Test Accuracy =  0.5587085811384876
+	Average Train Accuracy : 0.5621655281631929
+    Average Test Accuracy : 0.5615004645233774
 	confusion_matrix = 
 	[[3186   62]
  	[2535  102]]
@@ -32,6 +38,8 @@ svm.SVC():
 	columns=["'protocol_type'"=[icmp],"'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
 	Train Accuracy :  0.8726682887266829
 	Test Accuracy :  0.8519417475728155
+	Average Train Accuracy : 0.8775342610419254
+    Average Test Accuracy : 0.849908208759507
 	class_map ={'normal':0,'ipsweep':1,'nmap':2,'pod':3,'smurf':4}
 	confusion_matrix = 
 	[[ 68   0   0   0   9]
@@ -44,6 +52,8 @@ GaussianNB():
 	columns=["'protocol_type'"=[icmp],"'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
 	Train Accuracy :  0.6820762368207623
 	Test Accuracy :  0.7014563106796117
+	Average Train Accuracy : 0.7043469077734181
+    Average Test Accuracy : 0.6958497246262787
 	confusion_matrix = 
 	[[ 75   0   0   0   2]
 	 [  1  24 119   0   0]
@@ -56,6 +66,8 @@ RandomForestRegressor():
 	columns=["'protocol_type'"=[icmp],"'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
 	Train Accuracy :  0.964022473792323
 	Test Accuracy :  0.9614354113699156
+	Average Train Accuracy : 0.9660547306716145
+    Average Test Accuracy : 0.9549519960270505
 	class_map ={'normal':0,'ipsweep':1,'nmap':2,'pod':3,'smurf':4}
 	confusion_matrix = 
 	[[ 77   0   0   0   0]
@@ -69,6 +81,8 @@ svm.SVC():
 	columns=["'duration'","'flag'","'service'"=[http,http_443],"'src_bytes'","'dst_bytes'","'urgent'","'wrong_fragment'","'class'"]
 	Train Accuracy :  0.9871858058156727
 	Test Accuracy :  0.9807787087235091
+	Average Train Accuracy : 0.9889929393526918
+    Average Test Accuracy : 0.9870219730360382
 	class_map = {'normal':0,'anomaly':1}
 	confusion_matrix = 
 	[[1870   18]
@@ -78,6 +92,8 @@ GaussianNB():
 	columns=["'duration'","'flag'","'service'"=[http,http_443],"'src_bytes'","'dst_bytes'","'urgent'","'wrong_fragment'","'class'"]
 	Train Accuracy :  0.9811072778051585
 	Test Accuracy :  0.9797930014785609
+	Average Train Accuracy : 0.9854334059595331
+    Average Test Accuracy : 0.9852146530118399
 	class_map = {'normal':0,'anomaly':1}
 	confusion_matrix = 
 	[[1863   25]

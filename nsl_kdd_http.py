@@ -7,6 +7,9 @@ from sklearn.svm import *
 import pickle
 import pandas as pd
 import numpy as np
+
+from k_fold_validation import KFoldValidation
+
 model_cat = "http"
 #mapping to mathematical values
 flag_map = {'S0':0,'S1':1,'S2':2,'S3':3,'SH':4,'SF':5,'OTH':6,'REJ':7,'RSTO':8,'RSTR':9,'RSTOS0':10}
@@ -33,11 +36,11 @@ X_train,X_test,y_train,y_test = train_test_split(features,label,shuffle=True,ran
 
 #training model
 print("Training Model..")
-model = RandomForestRegressor()
+model = GaussianNB()
 model.fit(X_train,y_train)
 
 #saving model using pickle
-m_name="rfr"
+m_name="gnb"
 pkl_filename="models\\"+model_cat+"_"+m_name+'.pkl'
 with open(pkl_filename, 'wb') as file:
     pickle.dump(model, file)
@@ -61,3 +64,5 @@ except:
     cnf_matrix = confusion_matrix(y_test.round(), y_pred.round())
     print(cnf_matrix)
 
+kf = KFoldValidation()
+kf.GetAverageScore(10,features,label,GaussianNB(),X_train)

@@ -1,11 +1,8 @@
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import KFold
 
-from nsl_kdd_http import X_train
-
-
 class KFoldValidation():
-    def GetAverageScore(self,n,features,label,model):
+    def GetAverageScore(self,n,features,label,model,X_train):
         kf = KFold(n_splits=n, random_state=None, shuffle=True)
         X = features
         y = label

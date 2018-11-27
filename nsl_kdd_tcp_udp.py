@@ -38,7 +38,7 @@ model = RandomForestRegressor()
 model.fit(X_train,y_train)
 
 #saving model using pickle
-m_name="rf_reg"
+m_name="rfr"
 pkl_filename="models\\"+model_cat+"_"+m_name+'.pkl'
 with open(pkl_filename, 'wb') as file:
     pickle.dump(model, file)
@@ -58,4 +58,4 @@ cnf_matrix = confusion_matrix(y_test.round(), y_pred.round())
 print(cnf_matrix)
 
 kf = KFoldValidation()
-kf.GetAverageScore(10,features,label,RandomForestRegressor())
+kf.GetAverageScore(10,features,label,RandomForestRegressor(),X_train)

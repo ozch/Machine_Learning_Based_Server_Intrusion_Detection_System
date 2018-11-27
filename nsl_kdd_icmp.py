@@ -7,6 +7,9 @@ from sklearn.svm import *
 import pickle
 import pandas as pd
 import numpy as np
+
+from k_fold_validation import KFoldValidation
+
 model_cat = "icmp"
 #mapping to mathematical values
 class_map ={'normal':0,'ipsweep':1,'nmap':2,'pod':3,'smurf':4}
@@ -57,3 +60,5 @@ except:
     cnf_matrix = confusion_matrix(y_test.round(), y_pred.round())
     print(cnf_matrix)
 
+kf = KFoldValidation()
+kf.GetAverageScore(10,features,label,GaussianNB(),X_train)
