@@ -5,6 +5,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 class FloodPerdiction:
 
     def __init__(self):
+        #TODO check if model exist other wise create a model first by calling nsl_kdd_*.py files and using the model.
         # loading all three flooding models
         print("Loading Models:")
         http_fname = "models\\http_rfr.pkl"

@@ -18,7 +18,8 @@
 # srv_count = 23
 
 class DataProcess:
-    flag_map = {'S0':0,'S1':1,'S2':2,'S3':3,'SH':4,'SF':5,'OTH':6,'REJ':7,'RSTO':8,'RSTR':9,'RSTOS0':10}
+    #TODO there is something wrong with number of flags we're mapping and number of flags that are in db do some more reasearch and solve the problem
+    flag_map = {'S0':0,'S1':1,'S2':2,'S3':3,'SH':4,'SF':5,'OTH':6,'REJ':7,'RSTO':8,'RSTR':9,'RSTOS0':10,'RroSTC':11}
     class_map = {'normal':0,'anomaly':1}
     icmp_class_map = {'normal': 0, 'ipsweep': 1, 'nmap': 2, 'pod': 3, 'smurf': 4}
     def prepareInstance(self,instance):
@@ -28,6 +29,7 @@ class DataProcess:
 
         sr = instance.split(";")
         print(sr)
+        #TODO : Exception handling needed here
         if(sr[1].startswith("icmp")):
             # ICMP FEDD : duration,src_bytes,dst_bytes,count,srv_count
             df = {"duration":sr[0],"src_bytes":sr[4],"dst_bytes":sr[5],"count":sr[22],"srv_count":sr[23]}

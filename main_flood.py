@@ -1,7 +1,7 @@
 import pickle
 from  flood_predict import FloodPerdiction
 
-
+#TODO Implement self learning by saving data into database or file and learning from it
 
 fp = FloodPerdiction()
 
