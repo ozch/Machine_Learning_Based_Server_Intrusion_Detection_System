@@ -18,7 +18,7 @@ class_map = {'normal':0,'anomaly':1}
 csv = pd.read_csv("data\\HTTP.csv")
 columns=["'duration'","'flag'","'service'","'src_bytes'","'dst_bytes'","'urgent'","'wrong_fragment'","'class'"]
 df = pd.DataFrame(csv,columns=columns)
-
+print(df)
 #data manipulation, quering required data
 df1 = df.loc[df["'service'"]=='http']
 df2 = df.loc[df["'service'"]=='http_443']
@@ -26,7 +26,7 @@ df = pd.concat([df1,df2])
 
 df["'flag'"].replace(flag_map,inplace=True)
 df["'class'"].replace(class_map,inplace=True)
-print(df)
+
 
 #slice and dice.
 df.pop("'service'")

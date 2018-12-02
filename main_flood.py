@@ -4,10 +4,9 @@ from  flood_predict import FloodPerdiction
 
 
 fp = FloodPerdiction()
-print(type(http_model))
-result=fp.predictUDPTCP(http_model,[0,5,232,8153,0,0])
-print(type(http_model))
-print(type(result))
+
+result=fp.predictUDPTCP([0,5,232,8153,0,0])
+print(result)
 #import zmq
 #import time
 
