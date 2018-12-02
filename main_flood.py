@@ -1,23 +1,22 @@
-import pickle
-from  flood_predict import FloodPerdiction
 
+import zmq
+from data_process import DataProcess
+from  flood_predict import FloodPerdiction
 #TODO Implement self learning by saving data into database or file and learning from it
 
-fp = FloodPerdiction()
-
-result=fp.predictUDPTCP([0,5,232,8153,0,0])
-print(result)
-#import zmq
-#import time
-
-#context = zmq.Context()
+context = zmq.Context()
 # Socket to talk to server
-#print("Creating socket and connecting to extractor ...")
-#socket = context.socket(zmq.REP)
-#socket.bind("tcp://*:5555")
+print("Starting Operation...")
+socket = context.socket(zmq.PULL)
+socket.bind("tcp://*:5555")
 
-# Do 10 requests, waiting each time for a response
-#while True:
-#    message = socket.recv()
-#    print("Received request: %s" % message)
-#    socket.send(b"World")
+fp = FloodPerdiction()
+dp = DataProcess()
+
+while True:
+    message = socket.recv_string()
+    print("REC: " + message)
+    protocol, instance = dp.prepareInstance(message)
+    print(str(protocol) + ">" + str(instance))
+    result = fp.perdictAnomaly(protocol, instance)
+    print(result)

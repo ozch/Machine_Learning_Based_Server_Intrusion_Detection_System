@@ -4,15 +4,15 @@ from  flood_predict import FloodPerdiction
 fp = open('test_data.txt') # Open file on read mode
 lines = fp.read().split("\n") # Create a list containing all lines
 
+import zmq
 
-from  flood_predict import FloodPerdiction
-fp = FloodPerdiction()
-dp = DataProcess()
+context = zmq.Context()
+
+print("Connecting to hello world server…")
+socket = context.socket(zmq.PUSH)
+socket.connect("tcp://localhost:5555")
+
 for line in lines:
-    print(line)
-    protocol,instance = dp.prepareInstance(line)
-    print(str(protocol)+">"+str(instance))
-    result = fp.perdictAnomaly(protocol,instance)
-    print(result)
+    socket.send_string(line)
 
 fp.close() # Close file
