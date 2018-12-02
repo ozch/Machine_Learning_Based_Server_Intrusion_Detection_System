@@ -13,6 +13,8 @@ socket = context.socket(zmq.PUSH)
 socket.connect("tcp://localhost:5555")
 
 for line in lines:
-    socket.send_string(line)
-
+    try:
+        socket.send_string(line)
+    except:
+        print("Error!!!")
 fp.close() # Close file

@@ -12,11 +12,18 @@ socket.bind("tcp://*:5555")
 
 fp = FloodPerdiction()
 dp = DataProcess()
-
 while True:
-    message = socket.recv_string()
-    print("REC: " + message)
-    protocol, instance = dp.prepareInstance(message)
-    print(str(protocol) + ">" + str(instance))
-    result = fp.perdictAnomaly(protocol, instance)
-    print(result)
+    try:
+        message = socket.recv_string()
+        print("REC: " + message)
+        if(len(message)<50):
+            continue
+        try:
+            protocol, instance = dp.prepareInstance(message)
+            print(str(protocol) + ">" + str(instance))
+            result = fp.perdictAnomaly(protocol, instance)
+        except:
+            result = "-1"
+        print(result)
+    except:
+        print("ERROR!!!")
