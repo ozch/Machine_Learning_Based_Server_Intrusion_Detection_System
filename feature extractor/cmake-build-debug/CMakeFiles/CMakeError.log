@@ -1,0 +1,42 @@
+Determining if the function pcap_setsampling exists failed with the following output:
+Change Dir: /home/osamac/CLionProjects/Extractor/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_3d379/fast"
+/usr/bin/make -f CMakeFiles/cmTC_3d379.dir/build.make CMakeFiles/cmTC_3d379.dir/build
+make[1]: Entering directory '/home/osamac/CLionProjects/Extractor/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3d379.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pcap_setsampling   -o CMakeFiles/cmTC_3d379.dir/CheckFunctionExists.c.o   -c "/home/osamac/Program Files/clion-2017.3.4/bin/cmake/share/cmake-3.9/Modules/CheckFunctionExists.c"
+Linking C executable cmTC_3d379
+"/home/osamac/Program Files/clion-2017.3.4/bin/cmake/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_3d379.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pcap_setsampling    -rdynamic CMakeFiles/cmTC_3d379.dir/CheckFunctionExists.c.o  -o cmTC_3d379 /usr/lib/x86_64-linux-gnu/libpcap.so 
+CMakeFiles/cmTC_3d379.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `pcap_setsampling'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_3d379.dir/build.make:98: recipe for target 'cmTC_3d379' failed
+make[1]: *** [cmTC_3d379] Error 1
+make[1]: Leaving directory '/home/osamac/CLionProjects/Extractor/cmake-build-debug/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_3d379/fast' failed
+make: *** [cmTC_3d379/fast] Error 2
+
+
+Determining if the function pcap_open exists failed with the following output:
+Change Dir: /home/osamac/CLionProjects/Extractor/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_578f9/fast"
+/usr/bin/make -f CMakeFiles/cmTC_578f9.dir/build.make CMakeFiles/cmTC_578f9.dir/build
+make[1]: Entering directory '/home/osamac/CLionProjects/Extractor/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_578f9.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pcap_open   -o CMakeFiles/cmTC_578f9.dir/CheckFunctionExists.c.o   -c "/home/osamac/Program Files/clion-2017.3.4/bin/cmake/share/cmake-3.9/Modules/CheckFunctionExists.c"
+Linking C executable cmTC_578f9
+"/home/osamac/Program Files/clion-2017.3.4/bin/cmake/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_578f9.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pcap_open    -rdynamic CMakeFiles/cmTC_578f9.dir/CheckFunctionExists.c.o  -o cmTC_578f9 /usr/lib/x86_64-linux-gnu/libpcap.so 
+CMakeFiles/cmTC_578f9.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `pcap_open'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_578f9.dir/build.make:98: recipe for target 'cmTC_578f9' failed
+make[1]: *** [cmTC_578f9] Error 1
+make[1]: Leaving directory '/home/osamac/CLionProjects/Extractor/cmake-build-debug/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_578f9/fast' failed
+make: *** [cmTC_578f9/fast] Error 2
+
+

@@ -1,0 +1,8 @@
+"/home/osamac/Program Files/clion-2017.3.4/bin/cmake/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/osamac/CLionProjects/Extractor
+-- ENV{PCAPDIR}=
+-- PCAP_FOUND=TRUE
+-- PCAP_LIBRARIES=/usr/lib/x86_64-linux-gnu/libpcap.so
+-- PCAP_INCLUDE_DIR=/usr/include
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/osamac/CLionProjects/Extractor/cmake-build-debug
