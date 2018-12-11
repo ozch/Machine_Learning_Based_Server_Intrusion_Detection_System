@@ -1,7 +1,7 @@
-class parse_ubuntu:
+class ParseUbuntu:
     # [internal,failed,td,root,root_access,attempts]
     # dict = { IP:{internal:"",root:"",failure,td,}}
-    def parsingAbort(str_):
+    def parsingAbort(self,str_):
         if str_.find("Server listening") != -1:
             return 1
         if str_.find("disconnect") != -1:
@@ -22,7 +22,7 @@ class parse_ubuntu:
             return 1
         return 0
 
-    def getInfoAccepted(str_):
+    def getInfoAccepted(self,str_):
         if str_.find("Accepted password for") != -1:
             loc_start = str_.find("from ") + len("from ")
             loc_end = str_.find("port")
@@ -30,7 +30,7 @@ class parse_ubuntu:
         else:
             return "-1"
 
-    def GetFailedPasswordIP(str_):
+    def GetFailedPasswordIP(self,str_):
         if str_.find("Failed password for ") != -1:
             loc_start = str_.find("from ") + len("from ")
             loc_end = str_.find("port")
@@ -38,7 +38,7 @@ class parse_ubuntu:
         else:
             return "-1"
 
-    def GetFirstFailedPasswordIP(str_):
+    def GetFirstFailedPasswordIP(self,str_):
         if str_.find("authentication failure;") != -1:
             loc_start = str_.find(" rhost=") + len(" rhost=")
             loc_end = str_.find("  user=")
@@ -46,15 +46,15 @@ class parse_ubuntu:
         else:
             return "-1"
 
-    def SHHConnections(str_):
+    def SshMonitor(self,str_):
         is_failure = 1
         is_valid = 1
         ip = ""
-        ip = GetFirstFailedPasswordIP(str_)
+        ip = self.GetFirstFailedPasswordIP(str_)
         if ip == "-1":
-            ip = GetFailedPasswordIP(str_)
+            ip = self.GetFailedPasswordIP(str_)
             if ip == "-1":
-                ip = getInfoAccepted(str_)
+                ip = self.getInfoAccepted(str_)
                 if ip == "-1":
                     ip = "-1"
                     return 0, 0, 0, "-1", "-1"
