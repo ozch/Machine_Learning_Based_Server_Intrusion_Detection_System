@@ -14,6 +14,11 @@
 # wrong_frag = 7
 # urgent = 8
 # hot = 9
+#in extractor
+# count = 10
+# srv_count = 11
+
+#in data set
 # count = 22
 # srv_count = 23
 
@@ -32,7 +37,7 @@ class DataProcess:
         #TODO : Exception handling needed here
         if(sr[1].startswith("icmp")):
             # ICMP FEDD : duration,src_bytes,dst_bytes,count,srv_count
-            df = {"duration":sr[0],"src_bytes":sr[4],"dst_bytes":sr[5],"count":sr[22],"srv_count":sr[23]}
+            df = {"duration":sr[0],"src_bytes":sr[4],"dst_bytes":sr[5],"count":sr[9],"srv_count":sr[10]}
             protocol = 1
         else:
             if(sr[2].startswith("http")):
@@ -42,10 +47,10 @@ class DataProcess:
                 df["flag"] = self.flag_map[df["flag"]]
             else:
                 # UDP_TCP FEED : duration,flag,src_bytes,dst_bytes,count,srv_count
-                df = {"duration": sr[0], "flag": sr[3], "src_bytes": sr[4], "dst_bytes": sr[5],"count":sr[22],"srv_count":sr[23]}
+                df = {"duration": sr[0], "flag": sr[3], "src_bytes": sr[4], "dst_bytes": sr[5],"count":sr[9],"srv_count":sr[10]}
                 df["flag"]= self.flag_map[df["flag"]]
                 protocol=3
         list = []
         for k, v in df.items():
-            list.append(v)
+            list.append(int(v))
         return protocol,list

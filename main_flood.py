@@ -15,11 +15,13 @@ dp = DataProcess()
 while True:
     try:
         message = socket.recv_string()
-        print("REC: " + message)
-        if(len(message)<50):
+        msg = str(message)
+        print("REC: " + str(msg))
+        print(len(msg))
+        if(len(msg)<50):
             continue
         try:
-            protocol, instance = dp.prepareInstance(message)
+            protocol, instance = dp.prepareInstance(str(msg))
             print(str(protocol) + ">" + str(instance))
             result = fp.perdictAnomaly(protocol, instance)
         except:

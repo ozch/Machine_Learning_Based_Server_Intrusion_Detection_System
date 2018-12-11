@@ -13,7 +13,7 @@ model_cat = "udp_tcp"
 flag_map = {'S0':1,'S1':2,'S2':3,'S3':4,'SH':5,'SF':6,'OTH':7,'REJ':8,'RSTO':9,'RSTR':10,'RSTOS0':11}
 class_map = {'normal':0,'anomaly':1}
 #reading csv data
-csv = pd.read_csv("data\\HTTP.csv")
+csv = pd.read_csv("data/HTTP.csv")
 columns=["'protocol_type'","'duration'","'flag'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
 df = pd.DataFrame(csv,columns=columns)
 
@@ -39,7 +39,7 @@ model.fit(X_train,y_train)
 
 #saving model using pickle
 m_name="rfr"
-pkl_filename="models\\"+model_cat+"_"+m_name+'.pkl'
+pkl_filename="models/"+model_cat+"_"+m_name+'.pkl'
 with open(pkl_filename, 'wb') as file:
     pickle.dump(model, file)
 

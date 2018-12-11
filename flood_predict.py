@@ -1,22 +1,24 @@
 import sklearn
+from sklearn.ensemble import RandomForestRegressor
+import joblib
 import pickle
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 class FloodPerdiction:
-
+    http_model = RandomForestRegressor()
     def __init__(self):
         #TODO check if model exist other wise create a model first by calling nsl_kdd_*.py files and using the model.
         # loading all three flooding models
         print("Loading Models:")
-        http_fname = "models\\http_rfr.pkl"
+        http_fname = "models/http_rfr.pkl"
         print("Loading " + http_fname + "...")
         self.http_model = pickle.load(open(http_fname, 'rb'))
 
-        icmp_fname = "models\\icmp_rfr.pkl"
+        icmp_fname = "models/icmp_rfr.pkl"
         print("Loading " + icmp_fname + "...")
         self.icmp_model = pickle.load(open(icmp_fname, 'rb'))
 
-        udp_tcp_fname = "models\\udp_tcp_rfr.pkl"
+        udp_tcp_fname = "models/udp_tcp_rfr.pkl"
         print("Loading " + udp_tcp_fname + "...")
         self.udp_tcp_model = pickle.load(open(udp_tcp_fname, 'rb'))
     def predictHTTP(self,instance):

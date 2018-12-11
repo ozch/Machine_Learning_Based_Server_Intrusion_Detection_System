@@ -1,0 +1,92 @@
+/usr/bin/python3.6 "/home/osamac/Work/Anomaly Detection Models Creation/ssh_traffic.py"
+Initializing SSH session monitoring...
+b'Dec 11 20:05:50 Xerminal sshd[31072]: pam_unix(sshd:session): session closed for user osamac\n'
+-1
+HiHiHa
+b'Dec 11 20:05:50 Xerminal sshd[31264]: Received disconnect from 127.0.0.1 port 49604:11: disconnected by user\n'
+-1
+HiHiHa
+b'Dec 11 20:05:50 Xerminal sshd[31264]: Disconnected from user osamac 127.0.0.1 port 49604\n'
+-1
+HiHiHa
+b'Dec 11 20:05:50 Xerminal sshd[31215]: pam_unix(sshd:session): session closed for user osamac\n'
+-1
+HiHiHa
+b'Dec 11 20:05:50 Xerminal systemd-logind[823]: Removed session 5.\n'
+-1
+HiHiHa
+b'Dec 11 20:05:50 Xerminal sshd[31354]: Received disconnect from 127.0.0.1 port 49608:11: disconnected by user\n'
+-1
+HiHiHa
+b'Dec 11 20:05:50 Xerminal sshd[31354]: Disconnected from user osamac 127.0.0.1 port 49608\n'
+-1
+HiHiHa
+b'Dec 11 20:05:50 Xerminal sshd[31305]: pam_unix(sshd:session): session closed for user osamac\n'
+-1
+HiHiHa
+b'Dec 11 20:05:50 Xerminal systemd-logind[823]: Removed session 6.\n'
+-1
+HiHiHa
+b'Dec 11 20:05:50 Xerminal systemd-logind[823]: Removed session 7.\n'
+-1
+HiHiHa
+b'Dec 11 20:07:56 Xerminal sshd[1100]: Accepted password for osamac from 192.168.1.253 port 44032 ssh2\n'
+-1
+HiHiHa
+b'Dec 11 20:07:56 Xerminal sshd[1100]: pam_unix(sshd:session): session opened for user osamac by (uid=0)\n'
+-1
+HiHiHa
+b'Dec 11 20:07:56 Xerminal systemd-logind[823]: New session 13 of user osamac.\n'
+-1
+HiHiHa
+b'Dec 11 20:08:48 Xerminal sshd[1218]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.1.253  user=osamac\n'
+-1
+HiHiHa
+b'Dec 11 20:08:50 Xerminal sshd[1218]: Failed password for osamac from 192.168.1.253 port 44066 ssh2\n'
+-1
+HiHiHa
+b'Dec 11 20:08:59 Xerminal sshd[1218]: Failed password for osamac from 192.168.1.253 port 44066 ssh2\n'
+-1
+HiHiHa
+b'Dec 11 20:09:04 Xerminal sshd[1218]: Failed password for osamac from 192.168.1.253 port 44066 ssh2\n'
+-1
+HiHiHa
+b'Dec 11 20:09:04 Xerminal sshd[1218]: Connection closed by authenticating user osamac 192.168.1.253 port 44066 [preauth]\n'
+-1
+HiHiHa
+b'Dec 11 20:09:04 Xerminal sshd[1218]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.1.253  user=osamac\n'
+-1
+HiHiHa
+b'Dec 11 20:17:01 Xerminal CRON[1461]: pam_unix(cron:session): session opened for user root by (uid=0)\n'
+-1
+HiHiHa
+b'Dec 11 20:17:01 Xerminal CRON[1461]: pam_unix(cron:session): session closed for user root\n'
+-1
+HiHiHa
+b'Dec 11 20:18:15 Xerminal sshd[30724]: Received SIGHUP; restarting.\n'
+-1
+HiHiHa
+b'Dec 11 20:18:15 Xerminal sshd[30724]: Server listening on 0.0.0.0 port 22.\n'
+-1
+HiHiHa
+b'Dec 11 20:18:15 Xerminal sshd[30724]: Server listening on :: port 22.\n'
+-1
+HiHiHa
+b'Dec 11 20:18:25 Xerminal sshd[30724]: Received SIGHUP; restarting.\n'
+-1
+HiHiHa
+b'Dec 11 20:18:25 Xerminal sshd[30724]: Server listening on 0.0.0.0 port 22.\n'
+-1
+HiHiHa
+b'Dec 11 20:18:25 Xerminal sshd[30724]: Server listening on :: port 22.\n'
+-1
+HiHiHa
+b'Dec 11 20:19:25 Xerminal sshd[1619]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.1.253  user=root\n'
+-1
+HiHiHa
+b'Dec 11 20:19:27 Xerminal sshd[1619]: Failed password for root from 192.168.1.253 port 44234 ssh2\n'
+-1
+HiHiHa
+b'Dec 11 20:19:43 Xerminal sshd[1619]: message repeated 2 times: [ Failed password for root from 192.168.1.253 port 44234 ssh2]\n'
+-1
+HiHiHa
