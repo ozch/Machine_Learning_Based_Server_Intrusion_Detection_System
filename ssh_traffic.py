@@ -19,12 +19,11 @@ while True:
     if p.poll(1):
         temp = f.stdout.readline()
         temp = str(temp)
-        print(temp)
+        #print(temp)
         if str(temp).find("ssh") != -1:
             if up.parsingAbort(temp) == 0:
-                is_failure, is_root, is_valid, user, ip=up.SshMonitor(temp)
-                if user != "-1" or ip != "-1":
-                    print(" \t is_Failure: {0} , is_Root: {1} , is_Valid: {2} , User: {3} , IP: {4} ".format(is_failure, is_root, is_valid, user, ip))
+                is_private,is_failure, is_root, is_valid, user, ip,td,nf=up.SshProcessed(temp)
+                print(" \t is_failure: {0} , is_root: {1} , is_valid: {2} , user: {3} , ip: {4} ,no_failure: {5} , td: {6}, is_private:{7}".format(is_failure, is_root, is_valid, user, ip,nf,td,is_private))
 
 
 

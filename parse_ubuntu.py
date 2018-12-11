@@ -1,6 +1,12 @@
+import time
+import ipaddress
 class ParseUbuntu:
     # [internal,failed,td,root,root_access,attempts]
     # dict = { IP:{internal:"",root:"",failure,td,}}
+    dict = {}
+    number_of_failure = 0
+    def GetFailure(self):
+        return self.number_of_failure
     def parsingAbort(self,str_):
         if str_.find("Server listening") != -1:
             return 1
@@ -26,6 +32,7 @@ class ParseUbuntu:
         if str_.find("Accepted password for") != -1:
             loc_start = str_.find("from ") + len("from ")
             loc_end = str_.find("port")
+            self.number_of_failure = 0
             return str_[loc_start:loc_end - 1]
         else:
             return "-1"
@@ -34,7 +41,7 @@ class ParseUbuntu:
         if str_.find("Failed password for ") != -1:
             loc_start = str_.find("from ") + len("from ")
             loc_end = str_.find("port")
-            return str_[loc_start + 1:loc_end - 1]
+            return str_[loc_start:loc_end - 1]
         else:
             return "-1"
 
@@ -45,7 +52,23 @@ class ParseUbuntu:
             return str_[loc_start:loc_end]
         else:
             return "-1"
-
+    def SshProcessed(self,str_):
+        t = time.time()
+        td = 0
+        is_failure, is_root, is_valid, user, ip = self.SshMonitor(str_)
+        is_private = int(ipaddress.ip_address('192.168.1.253').is_private)
+        num = self.number_of_failure
+        if user != "-1" or ip != "-1":
+            if self.dict.get(ip) != None:
+                t_old = self.dict[ip]["td"]
+                td = int(t)-int(t_old)
+                self.dict.update({ip:{"is_private":is_private, "is_failure": is_failure , "is_root": is_root , "is_valid": is_valid , "user": user , "no_failure":num,"td":int(td)}})
+            else:
+                td = int(t)
+                self.dict.update({ip: {"is_private":is_private,"is_failure": is_failure, "is_root": is_root, "is_valid": is_valid, "user": user,"no_failure": num, "td": td}})
+                #self.dict[ip]='{"is_failure": "{0}" , "is_root": "{1}" , "is_valid": "{2}" , "user": "{3}" , "ip": "{4}" ,"no_failure": "{5}","td":"{6}"}'.format(str(is_failure), str(is_root), str(is_valid), user, ip,str(self.number_of_failure),str(int(t)))
+        print(self.dict)
+        return is_private,is_failure, is_root, is_valid, user, ip,td,self.number_of_failure
     def SshMonitor(self,str_):
         is_failure = 1
         is_valid = 1
@@ -68,6 +91,7 @@ class ParseUbuntu:
                 is_root = 0
             is_failure = 1
             is_valid = 1
+            self.number_of_failure = self.number_of_failure + 1
             return is_failure, is_root, is_valid, user, ip
         elif str_.find("Accepted password for") != -1:
             loc_start = str_.find("Accepted password for ") + len("Accepted password for ")
@@ -79,6 +103,7 @@ class ParseUbuntu:
                 is_root = 0
             is_failure = 0
             is_valid = 1
+            self.number_of_failure = 0
             return is_failure, is_root, is_valid, user, ip
         elif str_.find("Failed password for") != -1:
             loc_start = str_.find("Failed password for ") + len("Failed password for ")
@@ -90,6 +115,7 @@ class ParseUbuntu:
                 is_root = 0
             is_failure = 1
             is_valid = 1
+            self.number_of_failure = self.number_of_failure + 1
             return is_failure, is_root, is_valid, user, ip
         elif str_.find("Invalid user ") != -1:
             loc_start = str_.find("Invalid user ") + len("Invalid user ")
@@ -98,6 +124,7 @@ class ParseUbuntu:
             is_root = 0
             is_failure = 1
             is_valid = 0
+            self.number_of_failure = self.number_of_failure + 1
             return is_failure, is_root, is_valid, user, ip
         else:
             return 0, 0, 0, "-1", ip
