@@ -67,7 +67,8 @@ class ParseUbuntu:
                 td = int(t)
                 self.dict.update({ip: {"is_private":is_private,"is_failure": is_failure, "is_root": is_root, "is_valid": is_valid, "user": user,"no_failure": num, "td": td}})
                 #self.dict[ip]='{"is_failure": "{0}" , "is_root": "{1}" , "is_valid": "{2}" , "user": "{3}" , "ip": "{4}" ,"no_failure": "{5}","td":"{6}"}'.format(str(is_failure), str(is_root), str(is_valid), user, ip,str(self.number_of_failure),str(int(t)))
-        print(self.dict)
+        #printing dict
+        #print(self.dict)
         return is_private,is_failure, is_root, is_valid, user, ip,td,self.number_of_failure
     def SshMonitor(self,str_):
         is_failure = 1

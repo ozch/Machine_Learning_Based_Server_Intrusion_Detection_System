@@ -23,7 +23,8 @@ while True:
         if str(temp).find("ssh") != -1:
             if up.parsingAbort(temp) == 0:
                 is_private,is_failure, is_root, is_valid, user, ip,td,nf=up.SshProcessed(temp)
-                print(" \t is_failure: {0} , is_root: {1} , is_valid: {2} , user: {3} , ip: {4} ,no_failure: {5} , td: {6}, is_private:{7}".format(is_failure, is_root, is_valid, user, ip,nf,td,is_private))
+                if user != "-1" or ip != "-1":
+                    print(" \t is_failure: {0} , is_root: {1} , is_valid: {2} , user: {3} , ip: {4} ,no_failure: {5} , td: {6}, is_private:{7}".format(is_failure, is_root, is_valid, user, ip,nf,td,is_private))
 
 
 
