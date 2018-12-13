@@ -1,6 +1,5 @@
 INFO:
     Average Train/Test Accuracy : 10-K Fold Cross Validation
-
 ================================= UDP_TCP =================================
 svm.SVC():
 	data_size=[23537 rows x columns.size]

@@ -56,7 +56,9 @@ class ParseUbuntu:
         t = time.time()
         td = 0
         is_failure, is_root, is_valid, user, ip = self.SshMonitor(str_)
-        is_private = int(ipaddress.ip_address('192.168.1.253').is_private)
+        is_private = 1
+        if user != "-1" or ip != "-1":
+            is_private = int(ipaddress.ip_address(ip).is_private)
         num = self.number_of_failure
         if user != "-1" or ip != "-1":
             if self.dict.get(ip) != None:
@@ -68,7 +70,7 @@ class ParseUbuntu:
                 self.dict.update({ip: {"is_private":is_private,"is_failure": is_failure, "is_root": is_root, "is_valid": is_valid, "user": user,"no_failure": num, "td": td}})
                 #self.dict[ip]='{"is_failure": "{0}" , "is_root": "{1}" , "is_valid": "{2}" , "user": "{3}" , "ip": "{4}" ,"no_failure": "{5}","td":"{6}"}'.format(str(is_failure), str(is_root), str(is_valid), user, ip,str(self.number_of_failure),str(int(t)))
         #printing dict
-        #print(self.dict)
+        print(self.dict)
         return is_private,is_failure, is_root, is_valid, user, ip,td,self.number_of_failure
     def SshMonitor(self,str_):
         is_failure = 1

@@ -9,26 +9,30 @@ import pandas as pd
 import numpy as np
 
 from k_fold_validation import KFoldValidation
-
-model_cat = "ssh"
+#TODO Send sir the feature documentation file and colum below
+model_cat = "phish"
 
 #reading csv data
-csv = pd.read_csv("data/SSH.csv")
-columns=["is_private","is_failure","is_root","is_valid","no_failure","td","label"]
+csv = pd.read_csv("data/PHISH.csv")
+columns=["having_IP_Address","URL_Length","Shortining_Service","having_At_Symbol","double_slash_redirecting","Prefix_Suffix","having_Sub_Domain","SSLfinal_State,Domain_registeration_length","Favicon","Submitting_to_email","Abnormal_URL","Redirect","on_mouseover","RightClick","age_of_domain","DNSRecord","Google_Index","Links_pointing_to_page","Result"]
+
 df = pd.DataFrame(csv,columns=columns)
 
 #slice and dice.
-label = np.array(df.pop("label"))
+label = np.array(df.pop("Result"))
 features = np.array(df)
-X_train,X_test,y_train,y_test = train_test_split(features,label,shuffle=True,random_state=22)
-
+print(features)
+print(label)
+X_train,X_test,y_train,y_test = train_test_split(features,label,shuffle=True,random_state=77)
+print(X_train)
+print(y_train)
 #training model
 print("Training Model..")
-model = RandomForestRegressor()
+model = SVC()
 model.fit(X_train,y_train)
 
 #saving model using pickle
-m_name="rfr"
+m_name="svc"
 pkl_filename="models/"+model_cat+"_"+m_name+'.pkl'
 with open(pkl_filename, 'wb') as file:
     pickle.dump(model, file)
@@ -53,4 +57,4 @@ except:
     print(cnf_matrix)
 
 kf = KFoldValidation()
-kf.GetAverageScore(10,features,label,RandomForestRegressor(),X_train)
+kf.GetAverageScore(10,features,label,SVC(),X_train)

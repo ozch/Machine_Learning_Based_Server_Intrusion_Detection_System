@@ -1,6 +1,6 @@
 import csv
 
-csv_file = open('data/ssh.csv', 'w')
+csv_file = open('data/SSH.csv', 'w')
 with csv_file:
     df=["is_private","is_failure","is_root","is_valid","no_failure","td","label"]
     writer = csv.DictWriter(csv_file, fieldnames=df)
