@@ -1,4 +1,4 @@
-from data_process import DataProcess
+from flood_data_process import DataProcess
 from  flood_predict import FloodPerdiction
 
 fp = open('test_data.txt') # Open file on read mode
