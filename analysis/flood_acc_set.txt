@@ -1,6 +1,9 @@
 INFO:
     Average Train/Test Accuracy : 10-K Fold Cross Validation
 ================================= UDP =================================
+Total Dataset : 3011 rows
+Train Data = 2258
+Test Data = 753
 svm.SVC():
 	data_size=[3011 rows x columns]
 	columns=["'protocol_type'","'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'diff_srv_rate'","'dst_host_count'","'dst_host_same_src_port_rate'","'class'"]
@@ -32,6 +35,9 @@ RandomForestRegressor(): #CHOICE#
 	[[631   3]
     [  1 118]]
 ================================= TCP =================================
+Total Dataset : 20526 rows
+Train Data = 15394
+Test Data = 5132
 svm.SVC():#CHOICE#
 	data_size=[20526 rows x columns]
 	columns=["'duration'","'flag'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
@@ -63,6 +69,9 @@ RandomForestRegressor():
 	[[2658   11]
     [  31 2432]]
 ================================= ICMP =================================
+Total Dataset : 1645 rows
+Train Data = 1233
+Test Data = 412
 svm.SVC():
 	data_size=[1645 rows x columns.size]
 	columns=["'protocol_type'"=[icmp],"'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
@@ -98,6 +107,10 @@ RandomForestRegressor():#CHOICE#
 	[[ 77   0]
     [  0 335]]
 ================================= HTTP =================================
+Total Dataset : 8116 rows
+Train Data = 6087
+Test Data = 2029
+
 svm.SVC():#CHOICE#
 	data_size=[8116 rows x columns.size]
 	columns=["'duration'","'flag'","'service'"=[http,http_443],"'src_bytes'","'dst_bytes'","'urgent'","'wrong_fragment'","'class'"]

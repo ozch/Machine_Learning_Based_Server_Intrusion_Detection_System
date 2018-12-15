@@ -13,22 +13,27 @@ from k_fold_validation import KFoldValidation
 model_cat = "ssh"
 
 #reading csv data
-csv = pd.read_csv("data/SSH.csv")
-columns=["is_private","is_failure","is_root","is_valid","no_failure","td","label"]
-df = pd.DataFrame(csv,columns=columns)
+colum =['user','is_private','is_failure','is_root','is_valid','not_valid_count','ip_failure','ip_success','no_failure','first','td','ts','class']
+
+csv = pd.read_csv("data/SSH.csv",)
+df = pd.DataFrame(csv,columns=colum)
 
 #slice and dice.
-label = np.array(df.pop("label"))
+df.pop('user')
+df.pop('ts')
+df.pop('td')
+print(df)
+label = np.array(df.pop("class"))
 features = np.array(df)
 X_train,X_test,y_train,y_test = train_test_split(features,label,shuffle=True,random_state=22)
 
 #training model
 print("Training Model..")
-model = RandomForestRegressor()
+model = GaussianNB()
 model.fit(X_train,y_train)
 
 #saving model using pickle
-m_name="rfr"
+m_name="gnb"
 pkl_filename="models/"+model_cat+"_"+m_name+'.pkl'
 with open(pkl_filename, 'wb') as file:
     pickle.dump(model, file)
@@ -38,9 +43,9 @@ print("Train Accuracy : ", model.score(X_train, y_train))
 print("Test Accuracy : ", model.score(X_test, y_test))
 
 #testing data through perdiction
-perdict = model.predict([X_test[200]])
+perdict = model.predict([X_test[20]])
 print(perdict)
-print(y_test[200])
+print(y_test[20])
 
 try:
     # confusion matrix
@@ -53,4 +58,4 @@ except:
     print(cnf_matrix)
 
 kf = KFoldValidation()
-kf.GetAverageScore(10,features,label,RandomForestRegressor(),X_train)
+kf.GetAverageScore(10,features,label,GaussianNB(),X_train)

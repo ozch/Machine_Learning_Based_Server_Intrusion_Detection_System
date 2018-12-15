@@ -143,7 +143,9 @@ class Parse_SSH:
 
                 if is_failure == "0":
                     c = int(self.dict[ip]["ip_success"]) +1
-                    f = int(self.dict[ip]["ip_failure"])
+                    f = 0
+                    if(f <= 0):
+                        f = 0
                     td = t - int(self.dict[ip]["ts"])
                     self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid,"not_valid_count":count, "user": usr,"ip_failure":f,"ip_success":c, "no_failure": self.number_of_failure, "td": int(td),"first":0,"ts":int(t)}})
                 else:

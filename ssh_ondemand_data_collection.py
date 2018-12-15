@@ -14,10 +14,13 @@ for line in lines:
             continue
         elif dict != temp_dict:
             print(dict)
-            if int(dict['not_valid_count']) > 4 or (int(dict['ip_failure']) > (int(dict['ip_success'])+1) and int(dict['is_failure']) == 1):
-                if int(dict['td']) < 100 and int(dict['first']) != 1:
-                    dict.update({"class":1})
-                elif int(dict['td']) < 100 and int(dict['is_valid']) == 0:
+            dict.update({"class": 0})
+            if int(dict['not_valid_count']) > 7 or (int(dict['is_failure']) == 1 and int(dict['first']) == 0 and int(dict['no_failure']) > 6):
+                if int(dict['is_valid']) == 0 and int(dict['is_private']) == 0:
+                    dict.update({"class": 1})
+                if int(dict['ts']) < 150 and int(dict['is_valid']) == 0:
+                    dict.update({"class": 1})
+                if int(dict['ip_failure']) >= int(dict['ip_success']):
                     dict.update({"class": 1})
             else:
                 dict.update({"class": 0})
