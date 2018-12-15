@@ -1,5 +1,6 @@
 import ipaddress
 import time
+from datetime import datetime
 import re
 class Parse_SSH:
     dict = {}
@@ -53,12 +54,14 @@ class Parse_SSH:
             return 0
     # parse a date from the line
     def ParseDate(self,line):
-        date = re.search(r'^[A-Za-z]{3}\s*[0-9]{1,2}\s[0-9]{1,2}:[0-9]{2}:[0-9]{2}', line)
+        #date = re.search(r'^[A-Za-z]{3}\s*[0-9]{1,2}\s[0-9]{1,2}:[0-9]{2}:[0-9]{2}', line)
+        date = line[0:15]
+        date = datetime.strptime(date, '%b %d %H:%M:%S')
+        date = date.replace(year=2018)
         if date is not None:
-            print("Date " + str(date))
-            return date.group(2)
+            return date.timestamp()
         else:
-            "-1"
+            datetime.now().timestamp()
 
     # parse a command from a line
     def ParseCmd(line):
@@ -72,7 +75,7 @@ class Parse_SSH:
         else:
             return 0
     def SSHProcessed(self,line):
-        t = time.time()
+        t = self.ParseDate(str(line))
         # match a login
         if "Invalid user" in line:
             usr = self.ParseUsr(line)
@@ -114,17 +117,12 @@ class Parse_SSH:
             ip = "-1"
             return {}
         print("IP ADDRESS : " + ip)
-
-        print("IS ROOT : " + str(is_root))
-        print("IS VALID: " + str(is_valid))
-        print("IS FAILURE: " + str(is_failure))
-        print("IS PRIVATE: " + str(is_private))
         if usr != "-1" or ip != "-1":
             if self.dict.get(ip) == None:
                 if is_failure == "0":
-                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":0,"ip_success":1, "no_failure": self.number_of_failure, "td": int(t)}})
+                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":0,"ip_success":1, "no_failure": self.number_of_failure, "td": int(0),"first":1,"ts":t}})
                 else:
-                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":1,"ip_success":0, "no_failure": self.number_of_failure, "td": int(t)}})
+                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":1,"ip_success":0, "no_failure": self.number_of_failure, "td": int(0),"first":1,"ts":t}})
 
             else:
                 t_old = self.dict[ip]["td"]
@@ -132,13 +130,13 @@ class Parse_SSH:
                 if is_failure == "0":
                     c = int(self.dict[ip]["ip_success"]) +1
                     f = int(self.dict[ip]["ip_failure"])
-                    td = t - int(self.dict[ip]["td"])
-                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":f,"ip_success":c, "no_failure": self.number_of_failure, "td": int(td)}})
+                    td = t - int(self.dict[ip]["ts"])
+                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":f,"ip_success":c, "no_failure": self.number_of_failure, "td": int(td),"first":0,"ts":int(t)}})
                 else:
                     c = int(self.dict[ip]["ip_success"])
                     f = int(self.dict[ip]["ip_failure"]) + 1
-                    td = t-int(self.dict[ip]["td"])
-                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":f,"ip_success":c, "no_failure": self.number_of_failure, "td": int(td)}})
+                    td = t-int(self.dict[ip]["ts"])
+                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":f,"ip_success":c, "no_failure": self.number_of_failure, "td": int(td),"first":0,"ts":int(t)}})
         if self.dict.get(ip) == None:
             return {}
         return self.dict[ip]

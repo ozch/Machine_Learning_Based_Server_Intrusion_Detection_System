@@ -1,6 +1,6 @@
 import csv
 csv_file = open('data/SSH.csv', 'a+')
-df =['is_private', 'is_failure', 'is_root', 'is_valid', 'user', 'ip_failure','ip_success','no_failure','td','class']
+df =['is_private', 'is_failure', 'is_root', 'is_valid', 'user', 'ip_failure','ip_success','no_failure','td','first','ts','class']
 writer = csv.DictWriter(csv_file, fieldnames=df)
 from ssh_parse import *
 up = Parse_SSH()
