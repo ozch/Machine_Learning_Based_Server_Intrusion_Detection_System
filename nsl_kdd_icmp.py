@@ -12,7 +12,7 @@ from k_fold_validation import KFoldValidation
 
 model_cat = "icmp"
 #mapping to mathematical values
-class_map ={'normal':0,'ipsweep':1,'nmap':2,'pod':3,'smurf':4}
+class_map ={'normal':0,'ipsweep':1,'nmap':1,'pod':1,'smurf':1}
 #reading csv data
 csv = pd.read_csv("data/ICMP.csv")
 columns=["'protocol_type'","'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]

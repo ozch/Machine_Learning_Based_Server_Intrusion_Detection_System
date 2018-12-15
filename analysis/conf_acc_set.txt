@@ -1,6 +1,6 @@
 INFO:
     Average Train/Test Accuracy : 10-K Fold Cross Validation
-================================= TCP =================================
+================================= UDP =================================
 svm.SVC():
 	data_size=[20526 rows x columns]
 	columns=["'duration'","'flag'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
@@ -66,45 +66,37 @@ RandomForestRegressor():
 svm.SVC():
 	data_size=[1645 rows x columns.size]
 	columns=["'protocol_type'"=[icmp],"'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
-	Train Accuracy :  0.8726682887266829
-	Test Accuracy :  0.8519417475728155
-	Average Train Accuracy : 0.8775342610419254
-    Average Test Accuracy : 0.849908208759507
-	class_map ={'normal':0,'ipsweep':1,'nmap':2,'pod':3,'smurf':4}
+	Train Accuracy :  0.9991889699918897
+    Test Accuracy :  0.9781553398058253
+	Average Train Accuracy : 0.999188945482904
+    Average Test Accuracy : 0.9789011277209546
+	class_map ={'normal':0,'ipsweep':1,'nmap':1,'pod':1,'smurf':1}
 	confusion_matrix = 
-	[[ 68   0   0   0   9]
- 	 [  0 144   0   0   0]
- 	 [  0  50   0   0   0]
- 	 [  0   0   0   7   2]
- 	 [  0   0   0   0 132]]
+	[[ 68   9]
+    [  0 335]]
 GaussianNB():
 	data_size=[1645 rows x columns.size]
 	columns=["'protocol_type'"=[icmp],"'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
-	Train Accuracy :  0.6820762368207623
-	Test Accuracy :  0.7014563106796117
-	Average Train Accuracy : 0.7043469077734181
-    Average Test Accuracy : 0.6958497246262787
+	Train Accuracy :  0.8256285482562855
+    Test Accuracy :  0.8349514563106796
+	Average Train Accuracy : 0.8415785668445723
+    Average Test Accuracy : 0.8418633621820091
+    class_map ={'normal':0,'ipsweep':1,'nmap':1,'pod':1,'smurf':1}
 	confusion_matrix = 
-	[[ 75   0   0   0   2]
-	 [  1  24 119   0   0]
-	 [  0   0  50   0   0]
-	 [  0   0   0   9   0]
-	 [  0   0   0   1 131]]
+	[[ 73   4]
+    [ 64 271]]
 
 RandomForestRegressor():
 	data_size=[1645 rows x columns.size]
 	columns=["'protocol_type'"=[icmp],"'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
-	Train Accuracy :  0.964022473792323
-	Test Accuracy :  0.9614354113699156
-	Average Train Accuracy : 0.9660547306716145
-    Average Test Accuracy : 0.9549519960270505
-	class_map ={'normal':0,'ipsweep':1,'nmap':2,'pod':3,'smurf':4}
+	Train Accuracy :  0.9975086521324658
+    Test Accuracy :  0.9995208373715836
+	Average Train Accuracy : 0.9957692969430699
+    Average Test Accuracy : 0.9809499869646302
+	class_map ={'normal':0,'ipsweep':1,'nmap':1,'pod':1,'smurf':1}
 	confusion_matrix = 
-	[[ 77   0   0   0   0]
-	 [  0 131  13   0   0]
-	 [  0  46   4   0   0]
-	 [  0   0   0   9   0]
-	 [  0   0   0   0 132]]
+	[[ 77   0]
+    [  0 335]]
 ================================= HTTP =================================
 svm.SVC():
 	data_size=[8116 rows x columns.size]
