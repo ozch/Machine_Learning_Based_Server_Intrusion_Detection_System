@@ -25,6 +25,12 @@ class Parse_SSH:
             loc_start = str_.find("Invalid user ") + len("Invalid user ")
             loc_end = str_.find(" from")
             usr = str_[loc_start:loc_end]
+        elif "Failed password for" in line:
+            flag = 1
+            str_ = line
+            loc_start = str_.find("Failed password for ") + len("Failed password for ")
+            loc_end = str_.find(" from")
+            usr = str_[loc_start:loc_end]
         if usr is not None:
             if flag == 1:
                 return usr
@@ -124,11 +130,15 @@ class Parse_SSH:
                 t_old = self.dict[ip]["td"]
 
                 if is_failure == "0":
-                    self.dict[ip]["ip_success"] = self.dict[ip]["ip_success"] +1
-                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":0,"ip_success":1, "no_failure": self.number_of_failure, "td": int(t)}})
+                    c = int(self.dict[ip]["ip_success"]) +1
+                    f = int(self.dict[ip]["ip_failure"])
+                    td = t - int(self.dict[ip]["td"])
+                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":f,"ip_success":c, "no_failure": self.number_of_failure, "td": int(td)}})
                 else:
-                    self.dict[ip]["ip_failure"] = self.dict[ip]["ip_failure"] + 1
-                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":1,"ip_success":0, "no_failure": self.number_of_failure, "td": int(t)}})
+                    c = int(self.dict[ip]["ip_success"])
+                    f = int(self.dict[ip]["ip_failure"]) + 1
+                    td = t-int(self.dict[ip]["td"])
+                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":f,"ip_success":c, "no_failure": self.number_of_failure, "td": int(td)}})
         if self.dict.get(ip) == None:
             return {}
         return self.dict[ip]
