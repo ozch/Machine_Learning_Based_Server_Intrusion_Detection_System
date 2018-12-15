@@ -1,5 +1,5 @@
 
-================================= Phishing =================================
+================================= SSH =================================
 svm.SVC():
 	data_size=[11055 rows x columns.size]
     columns=["having_IP_Address","URL_Length","Shortining_Service","having_At_Symbol","double_slash_redirecting","Prefix_Suffix","having_Sub_Domain","SSLfinal_State,Domain_registeration_length","Favicon","Submitting_to_email","Abnormal_URL","Redirect","on_mouseover","RightClick","age_of_domain","DNSRecord","Google_Index","Links_pointing_to_page","Result"]
@@ -18,7 +18,7 @@ GaussianNB():
 	Average Train Accuracy : 0.5621655281631929
     Average Test Accuracy : 0.5615004645233774
 	confusion_matrix =
-	[[3186   62]......................................................
+	[[3186   62]
  	[2535  102]]
 RandomForestRegressor():
 	data_size=[23537 rows x columns.size]

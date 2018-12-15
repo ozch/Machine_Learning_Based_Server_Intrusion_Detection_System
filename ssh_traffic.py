@@ -5,27 +5,32 @@ from pygtail import Pygtail
 import time
 import subprocess
 import select
-from  parse_ubuntu import *
+from  ssh_parse import *
 auth_path = "/var/log/auth.log"
 
 print("Initializing SSH session monitoring...")
-up = ParseUbuntu()
+up = Parse_SSH()
 f = subprocess.Popen(['tail','-F',auth_path],\
         stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 
 p = select.poll()
 p.register(f.stdout)
+temp_dict = {}
 while True:
     if p.poll(1):
         temp = f.stdout.readline()
         temp = str(temp)
-        #print(temp)
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        print(temp)
         if str(temp).find("ssh") != -1:
-            if up.parsingAbort(temp) == 0:
-                is_private,is_failure, is_root, is_valid, user, ip,td,nf=up.SshProcessed(temp)
-                if user != "-1" or ip != "-1":
-                    print(" \t is_failure: {0} , is_root: {1} , is_valid: {2} , user: {3} , ip: {4} ,no_failure: {5} , td: {6}, is_private:{7}".format(is_failure, is_root, is_valid, user, ip,nf,td,is_private))
-
+            dict = up.SSHProcessed(temp)
+            if dict == {}:
+                continue
+            if dict != temp_dict:
+                print(dict)
+                temp_dict = dict
+            else:
+                continue
 
 
     time.sleep(0.01)

@@ -58,7 +58,13 @@ class ParseUbuntu:
         is_failure, is_root, is_valid, user, ip = self.SshMonitor(str_)
         is_private = 1
         if user != "-1" or ip != "-1":
-            is_private = int(ipaddress.ip_address(ip).is_private)
+            print("IP ADDRESS : "+ip[:len(ip)-2]+"  ORIGINAL : "+ip)
+            print("USER : " + user)
+            print("IS ROOT : " + str(is_root))
+            print("IS VALID: " + str(is_valid))
+            print("IS FAILURE: " + str(is_failure))
+            is_private = int(ipaddress.ip_address(ip[:len(ip)-2]).is_private)
+            print("IS PRIVATE: " + str(is_private))
         num = self.number_of_failure
         if user != "-1" or ip != "-1":
             if self.dict.get(ip) != None:
@@ -70,7 +76,7 @@ class ParseUbuntu:
                 self.dict.update({ip: {"is_private":is_private,"is_failure": is_failure, "is_root": is_root, "is_valid": is_valid, "user": user,"no_failure": num, "td": td}})
                 #self.dict[ip]='{"is_failure": "{0}" , "is_root": "{1}" , "is_valid": "{2}" , "user": "{3}" , "ip": "{4}" ,"no_failure": "{5}","td":"{6}"}'.format(str(is_failure), str(is_root), str(is_valid), user, ip,str(self.number_of_failure),str(int(t)))
         #printing dict
-        print(self.dict)
+        #print(self.dict)
         return is_private,is_failure, is_root, is_valid, user, ip,td,self.number_of_failure
     def SshMonitor(self,str_):
         is_failure = 1
@@ -109,15 +115,21 @@ class ParseUbuntu:
             self.number_of_failure = 0
             return is_failure, is_root, is_valid, user, ip
         elif str_.find("Failed password for") != -1:
-            loc_start = str_.find("Failed password for ") + len("Failed password for ")
-            loc_end = str_.find(" from")
-            user = str_[loc_start:loc_end]
+            if str_.find("invalid user") != -1:
+                is_valid = 0
+                loc_start = str_.find("Failed password for invalid user ") + len("Failed password for invalid user ")
+                loc_end = str_.find(" from")
+                user = str_[loc_start:loc_end]
+            else:
+                loc_start = str_.find("Failed password for ") + len("Failed password for ")
+                loc_end = str_.find(" from")
+                user = str_[loc_start:loc_end]
             if user.find("root") != -1:
                 is_root = 1
             else:
                 is_root = 0
             is_failure = 1
-            is_valid = 1
+
             self.number_of_failure = self.number_of_failure + 1
             return is_failure, is_root, is_valid, user, ip
         elif str_.find("Invalid user ") != -1:
