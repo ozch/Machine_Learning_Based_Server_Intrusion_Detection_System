@@ -16,16 +16,16 @@ while True:
     try:
         message = socket.recv_string()
         msg = str(message)
-        print("REC: " + str(msg))
+        print("RECEIVED INSTANCE : " + str(msg))
         print(len(msg))
         if(len(msg)<50):
             continue
         try:
             protocol, instance = dp.prepareInstance(str(msg))
-            print(str(protocol) + ">" + str(instance))
+            #print(str(protocol) + ">" + str(instance))
             result = fp.perdictAnomaly(protocol, instance)
         except:
             result = "-1"
-        print(result)
+        print("is Attack : " +str(result))
     except:
         print("ERROR!!!")

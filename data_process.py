@@ -33,10 +33,10 @@ class DataProcess:
 
 
         sr = instance.split(";")
-        print(sr)
+        #print(sr)
         #TODO : Exception handling needed here
         if(sr[1].startswith("icmp")):
-            # ICMP FEDD : duration,src_bytes,dst_bytes,count,srv_count
+            # ICMP FEED : duration,src_bytes,dst_bytes,count,srv_count
             df = {"duration":sr[0],"src_bytes":sr[4],"dst_bytes":sr[5],"count":sr[9],"srv_count":sr[10]}
             protocol = 1
         else:
@@ -45,12 +45,17 @@ class DataProcess:
                 df = {"duration": sr[0],"flag":sr[3] ,"src_bytes": sr[4], "dst_bytes": sr[5],"urgent": sr[8],"wrong_fragment": sr[7]}
                 protocol=2
                 df["flag"] = self.flag_map[df["flag"]]
+            elif(sr[1].startswith("udp")):
+                # UDP FEED :duration,src_bytes,dst_bytes,count,srv_count,diff_srv_rate,dst_host_count,dst_host_same_src_port_rate
+                df = {"duration": sr[0],"src_bytes": sr[4], "dst_bytes": sr[5],"count":sr[9],"srv_count":sr[10],"diff_srv_rate":sr[16],"dst_host_count":sr[18],"dst_host_same_src_port_rate":sr[22]}
+                protocol = 3
             else:
-                # UDP_TCP FEED : duration,flag,src_bytes,dst_bytes,count,srv_count
+                # TCP FEED : duration,flag,src_bytes,dst_bytes,count,srv_count
                 df = {"duration": sr[0], "flag": sr[3], "src_bytes": sr[4], "dst_bytes": sr[5],"count":sr[9],"srv_count":sr[10]}
                 df["flag"]= self.flag_map[df["flag"]]
-                protocol=3
+                protocol=4
         list = []
         for k, v in df.items():
-            list.append(int(v))
+            list.append(v)
+        print("Protocol : "+str(protocol)+" Instance : "+str(list))
         return protocol,list

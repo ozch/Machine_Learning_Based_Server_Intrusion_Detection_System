@@ -8,21 +8,17 @@ from k_fold_validation import *
 import pickle
 import pandas as pd
 import numpy as np
-model_cat = "udp_tcp"
+model_cat = "udp"
 #mapping to mathematical values
-flag_map = {'S0':1,'S1':2,'S2':3,'S3':4,'SH':5,'SF':6,'OTH':7,'REJ':8,'RSTO':9,'RSTR':10,'RSTOS0':11}
 class_map = {'normal':0,'anomaly':1}
 #reading csv data
-csv = pd.read_csv("data/HTTP.csv")
-columns=["'protocol_type'","'duration'","'flag'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
+csv = pd.read_csv("data/UDP.csv")
+columns=["'protocol_type'","'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'diff_srv_rate'","'dst_host_count'","'dst_host_same_src_port_rate'","'class'"]
 df = pd.DataFrame(csv,columns=columns)
 
 #data manipulation, quering required data
-df1 = df.loc[df["'protocol_type'"]=='tcp']
-df2 = df.loc[df["'protocol_type'"]=='udp']
-df = pd.concat([df1,df2])
+df = df.loc[df["'protocol_type'"]=='udp']
 
-df["'flag'"].replace(flag_map,inplace=True)
 df["'class'"].replace(class_map,inplace=True)
 print(df)
 

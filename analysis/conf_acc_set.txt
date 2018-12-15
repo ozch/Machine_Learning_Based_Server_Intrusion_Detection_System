@@ -2,37 +2,37 @@ INFO:
     Average Train/Test Accuracy : 10-K Fold Cross Validation
 ================================= UDP =================================
 svm.SVC():
-	data_size=[20526 rows x columns]
-	columns=["'duration'","'flag'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
-	Train Accuracy :  0.9929842795894505
-    Test Accuracy :  0.9686282151208107
-	Average Train Accuracy : 0.9937060577657905
-    Average Test Accuracy : 0.965375686691476
+	data_size=[3011 rows x columns]
+	columns=["'protocol_type'","'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'diff_srv_rate'","'dst_host_count'","'dst_host_same_src_port_rate'","'class'"]
+	Train Accuracy :  0.9993477626915113
+    Test Accuracy :  0.9442231075697212
+	Average Train Accuracy : 0.998654136421311
+    Average Test Accuracy : 0.934448377581121
 	confusion_matrix =
-	[[2665    4]
-    [ 157 2306]]
+	[[634   0]
+    [ 42  77]]
 GaussianNB():
-	data_size=[20526 rows x columns]
-	columns=["'duration'","'flag'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
-	Train Accuracy :  0.5373522151487593
-    Test Accuracy :  0.5385814497272019
-	Average Train Accuracy : 0.5734790359243117
-    Average Test Accuracy : 0.573584972532341
+	data_size=[3011 rows x columns]
+	columns=["'protocol_type'","'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'diff_srv_rate'","'dst_host_count'","'dst_host_same_src_port_rate'","'class'"]
+	Train Accuracy :  0.7714791851195748
+    Test Accuracy :  0.7848605577689243
+	Average Train Accuracy : 0.783437673079232
+    Average Test Accuracy : 0.7798643067846608
 	confusion_matrix =
-	[[2641   28]
-    [2340  123]]
-RandomForestRegressor():
-	data_size=[20526 rows x columns]
-	columns=["'duration'","'flag'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
-	Train Accuracy :  0.9782251476966706
-    Test Accuracy :  0.9733806232790015
-	Average Train Accuracy : 0.9800946114028333
-    Average Test Accuracy : 0.9690409717015273
+	[[469 165]
+    [  0 119]]
+RandomForestRegressor(): #CHOICE#
+	data_size=[3011 rows x columns]
+	columns=["'protocol_type'","'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'diff_srv_rate'","'dst_host_count'","'dst_host_same_src_port_rate'","'class'"]
+	Train Accuracy :  0.9957414246191608
+    Test Accuracy :  0.9610754711979429
+	Average Train Accuracy : 0.9959822183283524
+    Average Test Accuracy : 0.9790074815360166
 	confusion_matrix =
-	[[2658   11]
-    [  31 2432]]
+	[[631   3]
+    [  1 118]]
 ================================= TCP =================================
-svm.SVC():
+svm.SVC():#CHOICE#
 	data_size=[20526 rows x columns]
 	columns=["'duration'","'flag'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
 	Train Accuracy :  0.9929842795894505
@@ -86,7 +86,7 @@ GaussianNB():
 	[[ 73   4]
     [ 64 271]]
 
-RandomForestRegressor():
+RandomForestRegressor():#CHOICE#
 	data_size=[1645 rows x columns.size]
 	columns=["'protocol_type'"=[icmp],"'duration'","'src_bytes'","'dst_bytes'","'count'","'srv_count'","'class'"]
 	Train Accuracy :  0.9975086521324658
@@ -98,7 +98,7 @@ RandomForestRegressor():
 	[[ 77   0]
     [  0 335]]
 ================================= HTTP =================================
-svm.SVC():
+svm.SVC():#CHOICE#
 	data_size=[8116 rows x columns.size]
 	columns=["'duration'","'flag'","'service'"=[http,http_443],"'src_bytes'","'dst_bytes'","'urgent'","'wrong_fragment'","'class'"]
 	Train Accuracy :  0.9871858058156727
@@ -117,7 +117,7 @@ GaussianNB():
 	Average Train Accuracy : 0.9854334059595331
     Average Test Accuracy : 0.9852146530118399
 	class_map = {'normal':0,'anomaly':1}
-	confusion_matrix = 
+	confusion_matrix =
 	[[1863   25]
  	 [  16  125]]
 RandomForestRegressor():
@@ -131,6 +131,3 @@ RandomForestRegressor():
 	confusion_matrix = 
 	[[1870   18]
  	 [  15  126]]
-
-
-3
