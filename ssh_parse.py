@@ -2,10 +2,16 @@ import ipaddress
 import time
 from datetime import datetime
 import re
+
 class Parse_SSH:
     dict = {}
+    user_account = ['osamac', 'kamran', 'student', 'root']
     number_of_failure = 0
-
+    def isValid(self,name):
+        if name in self.user_account:
+            return "1"
+        else:
+            return "0"
     def GetFailure(self):
         return self.number_of_failure
 
@@ -71,9 +77,9 @@ class Parse_SSH:
             return cmd.group(2)
     def isRoot(self,line):
         if line.find("root") != -1:
-            return 1
+            return "1"
         else:
-            return 0
+            return "0"
     def SSHProcessed(self,line):
         t = self.ParseDate(str(line))
         # match a login
@@ -84,7 +90,7 @@ class Parse_SSH:
             self.number_of_failure= self.number_of_failure+1
             is_failure = "1"
             is_root = self.isRoot(line)
-            is_valid = "0"
+            is_valid = self.isValid(usr)
         elif "Accepted password for" in line:
             usr = self.ParseUsr(line)
             ip = self.ParseIP(line)
@@ -92,7 +98,7 @@ class Parse_SSH:
             self.number_of_failure=0
             is_failure = "0"
             is_root = self.isRoot(line)
-            is_valid = "1"
+            is_valid = self.isValid(usr)
         # match a failed login
         elif "Failed password for" in line:
             usr = self.ParseUsr(line)
@@ -101,17 +107,16 @@ class Parse_SSH:
             self.number_of_failure = self.number_of_failure + 1
             is_failure = "1"
             is_root = self.isRoot(line)
-            is_valid = 0
+            is_valid = self.isValid(usr)
 
         elif "authentication failure;" in line:
             usr = self.ParseUsr(line)
             ip = self.ParseIP(line)
             is_private = self.isPrivate(ip)
             self.number_of_failure = self.number_of_failure + 1
-
-            is_failure = "0"
+            is_failure = "1"
             is_root = self.isRoot(line)
-            is_valid = 0
+            is_valid = self.isValid(usr)
         else:
             usr = "-1"
             ip = "-1"
@@ -119,24 +124,33 @@ class Parse_SSH:
         print("IP ADDRESS : " + ip)
         if usr != "-1" or ip != "-1":
             if self.dict.get(ip) == None:
-                if is_failure == "0":
-                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":0,"ip_success":1, "no_failure": self.number_of_failure, "td": int(0),"first":1,"ts":t}})
+                count = -1
+                if is_valid == "1":
+                    count = 0
                 else:
-                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":1,"ip_success":0, "no_failure": self.number_of_failure, "td": int(0),"first":1,"ts":t}})
+                    count = 1
+                if is_failure == "0":
+                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid,"not_valid_count":count, "user": usr,"ip_failure":0,"ip_success":1, "no_failure": self.number_of_failure, "td": int(0),"first":1,"ts":t}})
+                else:
+                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid,"not_valid_count":count, "user": usr,"ip_failure":1,"ip_success":0, "no_failure": self.number_of_failure, "td": int(0),"first":1,"ts":t}})
 
             else:
-                t_old = self.dict[ip]["td"]
+                count = -1
+                if is_valid == "1":
+                    count = 0
+                else:
+                    count = int(self.dict[ip]["not_valid_count"])+1
 
                 if is_failure == "0":
                     c = int(self.dict[ip]["ip_success"]) +1
                     f = int(self.dict[ip]["ip_failure"])
                     td = t - int(self.dict[ip]["ts"])
-                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":f,"ip_success":c, "no_failure": self.number_of_failure, "td": int(td),"first":0,"ts":int(t)}})
+                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid,"not_valid_count":count, "user": usr,"ip_failure":f,"ip_success":c, "no_failure": self.number_of_failure, "td": int(td),"first":0,"ts":int(t)}})
                 else:
                     c = int(self.dict[ip]["ip_success"])
                     f = int(self.dict[ip]["ip_failure"]) + 1
                     td = t-int(self.dict[ip]["ts"])
-                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid, "user": usr,"ip_failure":f,"ip_success":c, "no_failure": self.number_of_failure, "td": int(td),"first":0,"ts":int(t)}})
+                    self.dict.update({ip: {"is_private": is_private, "is_failure": is_failure, "is_root": is_root,"is_valid": is_valid,"not_valid_count":count, "user": usr,"ip_failure":f,"ip_success":c, "no_failure": self.number_of_failure, "td": int(td),"first":0,"ts":int(t)}})
         if self.dict.get(ip) == None:
             return {}
         return self.dict[ip]
