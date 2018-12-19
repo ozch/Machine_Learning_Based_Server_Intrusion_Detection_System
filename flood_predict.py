@@ -3,12 +3,16 @@ from sklearn.ensemble import RandomForestRegressor
 import joblib
 import pickle
 import warnings
+from flood_data_process import DataProcess
+from flood_data_addition import FloodDataAddition
 warnings.simplefilter(action='ignore', category=FutureWarning)
 class FloodPerdiction:
     http_model = RandomForestRegressor()
     def __init__(self):
         #TODO check if model exist other wise create a model first by calling nsl_kdd_*.py files and using the model.
         # loading all three flooding models
+        self.dp = DataProcess()
+        self.fda= FloodDataAddition()
         print("Loading Models:")
         http_fname = "models/http_svc.pkl"
         print("Loading " + http_fname + "...")
@@ -26,27 +30,67 @@ class FloodPerdiction:
         print("Loading " + tcp_fname + "...")
         self.tcp_model = pickle.load(open(tcp_fname, 'rb'))
 
-    def predictHTTP(self,instance):
-        perdict = self.http_model.predict([instance])
-        return perdict[0]
-    def predictUDP(self,instance):
-        perdict = self.udp_model.predict([instance])
-        return perdict[0]
-    def predictTCP(self,instance):
-        perdict = self.tcp_model.predict([instance])
-        return perdict[0]
-    def predictICMP(self,instance):
-        perdict = self.icmp_model.predict([instance])
-        return perdict[0]
-    def perdictAnomaly(self,protocol,instance):
+    def predictHTTP(self,dict):
+        perdict = self.http_model.predict([self.dp.prepareList(dict)])
+        per = perdict[0]
+        str_ = ""
+        if per < 0.6:
+            str_ = 'normal'
+        else:
+            str_ = 'anomaly'
+        dict_temp = dict.copy()
+        dict_temp.update({'class':str_})
+        self.fda.writeHTTP(dict_temp)
+        return per
+    #Todo refector the code which labels anomaly and normal, or just leave it there who's gonna notice
+    def predictUDP(self,dict):
+        perdict = self.udp_model.predict([self.dp.prepareList(dict)])
+        per = perdict[0]
+        str_ = ""
+        if per < 0.6:
+            str_ = 'normal'
+        else:
+            str_ = 'anomaly'
+        dict_temp = dict.copy()
+        dict_temp.update({'class': str_})
+        self.fda.writeUDP(dict_temp)
+        return per
+
+    def predictTCP(self,dict):
+        perdict = self.tcp_model.predict([self.dp.prepareList(dict)])
+        per = perdict[0]
+        str_ = ""
+        if per < 0.6:
+            str_ = 'normal'
+        else:
+            str_ = 'anomaly'
+        dict_temp = dict.copy()
+        dict_temp.update({'class': str_})
+        self.fda.writeTCP(dict_temp)
+        return per
+
+    def predictICMP(self,dict):
+        perdict = self.icmp_model.predict([self.dp.prepareList(dict)])
+        per = perdict[0]
+        str_ = ""
+        if per < 0.6:
+            str_ = 'normal'
+        else:
+            str_ = 'anomaly'
+        dict_temp = dict.copy()
+        dict_temp.update({'class': str_})
+        self.fda.writeICMP(dict_temp)
+        return per
+
+    def perdictAnomaly(self,protocol,dict):
         if(protocol == 1):
-            x = self.predictICMP(instance)
+            x = self.predictICMP(dict)
         elif(protocol == 2):
-            x = self.predictHTTP(instance)
+            x = self.predictHTTP(dict)
         elif (protocol == 3):
-            x = self.predictUDP(instance)
+            x = self.predictUDP(dict)
         elif (protocol == 4):
-            x = self.predictTCP(instance)
+            x = self.predictTCP(dict)
         else:
             print("To Something")
         return x
