@@ -45,6 +45,8 @@ class FloodPerdiction:
             x = self.predictHTTP(instance)
         elif (protocol == 3):
             x = self.predictUDP(instance)
-        else:
+        elif (protocol == 4):
             x = self.predictTCP(instance)
+        else:
+            print("To Something")
         return x

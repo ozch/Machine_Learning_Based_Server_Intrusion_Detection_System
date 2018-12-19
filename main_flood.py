@@ -25,7 +25,7 @@ while True:
             #print(str(protocol) + ">" + str(instance))
             result = fp.perdictAnomaly(protocol, instance)
         except:
-            result = "-1"
+            result = "Exception: hahaha"
         print("is Attack : " +str(result))
     except:
         print("ERROR!!!")
