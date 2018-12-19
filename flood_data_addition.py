@@ -10,19 +10,20 @@ class FloodDataAddition:
           'dst_host_srv_rerror_rate', 'class']
     def __init__(self):
         print("Initializing data addition modules")
-        self.icmp_writer = csv.DictWriter(open('data/ICMP.csv', 'a+'), fieldnames=self.df)
-        self.tcp_writer = csv.DictWriter(open('data/TCP.csv', 'a+'), fieldnames=self.df)
-        self.udp_writer = csv.DictWriter(open('data/UDP.csv', 'a+'), fieldnames=self.df)
-        self.http_writer = csv.DictWriter(open('data/HTTP.csv', 'a+'), fieldnames=self.df)
 
     def writeICMP(self,df_temp):
-        self.icmp_writer.writerow(df_temp)
+        print(df_temp)
+        icmp_writer = csv.DictWriter(open('data/ICMP.csv', 'a+'), fieldnames=self.df)
+        icmp_writer.writerow(df_temp)
 
     def writeTCP(self,df_temp):
-        self.tcp_writer.writerow(df_temp)
+        tcp_writer = csv.DictWriter(open('data/TCP.csv', 'a+'), fieldnames=self.df)
+        tcp_writer.writerow(df_temp)
 
     def writeUDP(self,df_temp):
-        self.udp_writer.writerow(df_temp)
+        udp_writer = csv.DictWriter(open('data/UDP.csv', 'a+'), fieldnames=self.df)
+        udp_writer.writerow(df_temp)
 
     def writeHTTP(self,df_temp):
-        self.http_writer.writerow(df_temp)
+        http_writer = csv.DictWriter(open('data/HTTP.csv', 'a+'), fieldnames=self.df)
+        http_writer.writerow(df_temp)

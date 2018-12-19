@@ -34,7 +34,7 @@ class FloodPerdiction:
         perdict = self.http_model.predict([self.dp.prepareList(dict)])
         per = perdict[0]
         str_ = ""
-        if per < 0.6:
+        if per <= 0.6:
             str_ = 'normal'
         else:
             str_ = 'anomaly'
@@ -47,7 +47,7 @@ class FloodPerdiction:
         perdict = self.udp_model.predict([self.dp.prepareList(dict)])
         per = perdict[0]
         str_ = ""
-        if per < 0.6:
+        if per <= 0.6:
             str_ = 'normal'
         else:
             str_ = 'anomaly'
@@ -60,7 +60,7 @@ class FloodPerdiction:
         perdict = self.tcp_model.predict([self.dp.prepareList(dict)])
         per = perdict[0]
         str_ = ""
-        if per < 0.6:
+        if per <= 0.6:
             str_ = 'normal'
         else:
             str_ = 'anomaly'
@@ -73,7 +73,7 @@ class FloodPerdiction:
         perdict = self.icmp_model.predict([self.dp.prepareList(dict)])
         per = perdict[0]
         str_ = ""
-        if per < 0.6:
+        if per <= 0.6:
             str_ = 'normal'
         else:
             str_ = 'anomaly'

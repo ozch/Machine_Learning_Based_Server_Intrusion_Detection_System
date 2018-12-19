@@ -38,8 +38,6 @@ class DataProcess:
         sr = instance.split(";")
         #TODO : Exception handling needed here
         if(sr[1].startswith("icmp")):
-            csv_file = open('data/ICMP.csv', 'a+')
-            writer = csv.DictWriter(csv_file, fieldnames=self.df)
             # ICMP FEED : duration,src_bytes,dst_bytes,count,srv_count
             df = {"duration":sr[0],"src_bytes":sr[4],"dst_bytes":sr[5],"count":sr[9],"srv_count":sr[10]}
             protocol = 1
