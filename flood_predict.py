@@ -40,6 +40,8 @@ class FloodPerdiction:
             str_ = 'anomaly'
         dict_temp = dict.copy()
         dict_temp.update({'class':str_})
+        dict_temp.update({'service': 'http'})
+        dict_temp.update({'protocol_type': 'tcp'})
         self.fda.writeHTTP(dict_temp)
         return per
     #Todo refector the code which labels anomaly and normal, or just leave it there who's gonna notice
@@ -53,6 +55,7 @@ class FloodPerdiction:
             str_ = 'anomaly'
         dict_temp = dict.copy()
         dict_temp.update({'class': str_})
+        dict_temp.update({'protocol_type': 'udp'})
         self.fda.writeUDP(dict_temp)
         return per
 
@@ -66,6 +69,7 @@ class FloodPerdiction:
             str_ = 'anomaly'
         dict_temp = dict.copy()
         dict_temp.update({'class': str_})
+        dict_temp.update({'protocol_type': 'tcp'})
         self.fda.writeTCP(dict_temp)
         return per
 
@@ -76,9 +80,10 @@ class FloodPerdiction:
         if per <= 0.6:
             str_ = 'normal'
         else:
-            str_ = 'anomaly'
+            str_ = 'smurf'
         dict_temp = dict.copy()
         dict_temp.update({'class': str_})
+        dict_temp.update({'protocol_type': 'icmp'})
         self.fda.writeICMP(dict_temp)
         return per
 
