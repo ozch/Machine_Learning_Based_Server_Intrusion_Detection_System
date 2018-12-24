@@ -5,6 +5,7 @@ import pickle
 import warnings
 from flood_data_process import DataProcess
 from flood_data_addition import FloodDataAddition
+import numpy as np
 warnings.simplefilter(action='ignore', category=FutureWarning)
 class FloodPerdiction:
     http_model = RandomForestRegressor()
@@ -14,24 +15,24 @@ class FloodPerdiction:
         self.dp = DataProcess()
         self.fda= FloodDataAddition()
         print("Loading Models:")
-        http_fname = "models/http_rfr.pkl"
+        http_fname = "models/http_gnb.pkl"
         print("Loading " + http_fname + "...")
         self.http_model = pickle.load(open(http_fname, 'rb'))
 
-        icmp_fname = "models/icmp_rfr.pkl"
+        icmp_fname = "models/icmp_gnb.pkl"
         print("Loading " + icmp_fname + "...")
         self.icmp_model = pickle.load(open(icmp_fname, 'rb'))
 
-        udp_fname = "models/udp_rfr.pkl"
+        udp_fname = "models/udp_gnb.pkl"
         print("Loading " + udp_fname + "...")
         self.udp_model = pickle.load(open(udp_fname, 'rb'))
 
-        tcp_fname = "models/tcp_rfr.pkl"
+        tcp_fname = "models/tcp_gnb.pkl"
         print("Loading " + tcp_fname + "...")
         self.tcp_model = pickle.load(open(tcp_fname, 'rb'))
 
     def predictHTTP(self,dict):
-        perdict = self.http_model.predict([self.dp.prepareList(dict)])
+        perdict = self.http_model.predict([np.int64(self.dp.prepareList(dict))])
         per = perdict[0]
         str_ = ""
         if per <= 0.6:
@@ -46,7 +47,7 @@ class FloodPerdiction:
         return per
     #Todo refector the code which labels anomaly and normal, or just leave it there who's gonna notice
     def predictUDP(self,dict):
-        perdict = self.udp_model.predict([self.dp.prepareList(dict)])
+        perdict = self.udp_model.predict([np.int64(self.dp.prepareList(dict))])
         per = perdict[0]
         str_ = ""
         if per <= 0.6:
@@ -60,7 +61,8 @@ class FloodPerdiction:
         return per
 
     def predictTCP(self,dict):
-        perdict = self.tcp_model.predict([self.dp.prepareList(dict)])
+
+        perdict = self.tcp_model.predict([np.int64(self.dp.prepareList(dict))])
         per = perdict[0]
         str_ = ""
         if per <= 0.6:
@@ -74,7 +76,7 @@ class FloodPerdiction:
         return per
 
     def predictICMP(self,dict):
-        perdict = self.icmp_model.predict([self.dp.prepareList(dict)])
+        perdict = self.icmp_model.predict([np.int64(self.dp.prepareList(dict))])
         per = perdict[0]
         str_ = ""
         if per <= 0.6:

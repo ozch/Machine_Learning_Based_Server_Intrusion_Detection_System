@@ -1,7 +1,7 @@
 
 import zmq
 from flood_data_process import DataProcess
-from  flood_predict import FloodPerdiction
+from  flood_predict_gnb import FloodPerdiction
 import traceback
 #TODO Implement self learning by saving data into database or file and learning from it
 
@@ -26,14 +26,10 @@ while True:
             #print(str(protocol) + ">" + str(instance))
             result = fp.perdictAnomaly(protocol, instance)
         except:
-            traceback._cause_message
-            traceback._context_message
             traceback.print_exc()
             result = "Exception: An Error Occurred While Predicting Value"
         print("Attack : " +str(result))
         print("_______________________________________________________")
     except:
-        traceback._cause_message
-        traceback._context_message
         traceback.print_exc()
         print("Exception : An Error Occurred, ZeroMQ")

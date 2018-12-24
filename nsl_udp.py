@@ -30,11 +30,11 @@ X_train,X_test,y_train,y_test = train_test_split(features,label,shuffle=True,ran
 
 #training model
 print("Training Model..")
-model = GaussianNB()
+model = RandomForestRegressor()
 model.fit(X_train,y_train)
 
 #saving model using pickle
-m_name="gnb"
+m_name="rfr"
 pkl_filename="models/"+model_cat+"_"+m_name+'.pkl'
 with open(pkl_filename, 'wb') as file:
     pickle.dump(model, file)
@@ -54,4 +54,4 @@ cnf_matrix = confusion_matrix(y_test.round(), y_pred.round())
 print(cnf_matrix)
 
 kf = KFoldValidation()
-kf.GetAverageScore(10,features,label,GaussianNB(),X_train)
+kf.GetAverageScore(10,features,label,RandomForestRegressor(),X_train)
