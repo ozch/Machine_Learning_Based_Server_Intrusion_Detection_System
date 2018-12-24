@@ -14,19 +14,19 @@ class FloodPerdiction:
         self.dp = DataProcess()
         self.fda= FloodDataAddition()
         print("Loading Models:")
-        http_fname = "models/http_svc.pkl"
+        http_fname = "models/http_gnb.pkl"
         print("Loading " + http_fname + "...")
         self.http_model = pickle.load(open(http_fname, 'rb'))
 
-        icmp_fname = "models/icmp_rfr.pkl"
+        icmp_fname = "models/icmp_gnb.pkl"
         print("Loading " + icmp_fname + "...")
         self.icmp_model = pickle.load(open(icmp_fname, 'rb'))
 
-        udp_fname = "models/udp_rfr.pkl"
+        udp_fname = "models/udp_gnb.pkl"
         print("Loading " + udp_fname + "...")
         self.udp_model = pickle.load(open(udp_fname, 'rb'))
 
-        tcp_fname = "models/tcp_svc.pkl"
+        tcp_fname = "models/tcp_gnb.pkl"
         print("Loading " + tcp_fname + "...")
         self.tcp_model = pickle.load(open(tcp_fname, 'rb'))
 

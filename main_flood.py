@@ -26,8 +26,14 @@ while True:
             #print(str(protocol) + ">" + str(instance))
             result = fp.perdictAnomaly(protocol, instance)
         except:
+            traceback._cause_message
+            traceback._context_message
             traceback.print_exc()
-            result = "Exception: hahaha"
-        print("is Attack : " +str(result))
+            result = "Exception: An Error Occurred While Predicting Value"
+        print("Attack : " +str(result))
+        print("_______________________________________________________")
     except:
-        print("ERROR!!!")
+        traceback._cause_message
+        traceback._context_message
+        traceback.print_exc()
+        print("Exception : An Error Occurred, ZeroMQ")
