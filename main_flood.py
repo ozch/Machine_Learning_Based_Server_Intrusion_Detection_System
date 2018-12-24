@@ -1,7 +1,7 @@
 
 import zmq
 from flood_data_process import DataProcess
-from  flood_predict_gnb import FloodPerdiction
+from  flood_predict import FloodPerdiction
 import traceback
 #TODO Implement self learning by saving data into database or file and learning from it
 
